@@ -1,16 +1,15 @@
 import matplotlib.pyplot as plt
 import numpy as np
-print("pour une équation différentielle de la forme y'=ay, x représente l'abscisse de la condition initiale, y son ordonnée, z la fin de l'intervalle et h le nombre de points attendus")
 
-def fonction(a,x,y,z,h):
-    L1=[x]
+def fonction(a,x0,y,z,h):
+    L1=[x0]
     L2=[y]
-    i=x
+    i=x0
     pas=(z-i)/h
     while i<h:
-        x=x+pas
+        x0=x0+pas
         y=y+(a*y)*pas
-        L1.append(x)
+        L1.append(x0)
         L2.append(y)
         i+=1
     return L1,L2
