@@ -2,30 +2,44 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def euler(x0,v0,h,N):
+def euler(x0,v0,z,N):
+    #initialisation
     tab_x = np.zeros(N)
     tab_v = np.zeros(N)
-    tab_t = np.arange(N)*h
+    tab_t = np.zeros(N)
+    pas=z/N
     c=g/l
     x=x0
     v=v0
+    t=0
+
+    #méthode d'euler
     for i in range (N):
+        tab_t[i]=t
         tab_x[i]=x
         tab_v[i]=v
-        (x,v)= (x+v*h,v-c*np.sin(x)*h)
+        (t,x,v)= (t+pas,x+v*pas,v-c*np.sin(x)*pas)
     return (tab_t,tab_x,tab_v)
 
 g=10
 l=2
-h=1e-3
-N=10000
+N=1000
 x0=1
 v0=1
-(t,x,v)=euler(x0,v0,h,N)
+z=10
 
-plt.figure()
+(t,x,v)=euler(x0,v0,z,N)
+
+#graphique de la sotution de la méthode d'euler explicite
+plt.figure("position angulaire (theta) en fonction de t")
 plt.plot(t,x)
-plt.xlabel("x")
-plt.ylabel("y")
+plt.xlabel("t")
+plt.ylabel("theta(t)")
 plt.grid()
+
+#graphique de la vitesse en fonction de la position, instable
+plt.figure ("vitesse angulaire (theta point) en fonction de la position angulaire (theta)")
+plt.plot(x,v)
+plt.xlabel("theta")
+plt.ylabel("theta point")
 plt.show()
